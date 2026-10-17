@@ -23,9 +23,10 @@ jobs:
         with:
           gradle-version: '8.4'
 
-      - name: Compile Release & Debug APK
+      - name: Auto-Fix & Compile APK
         run: |
           cd zoom-caption-transcriber-huawei-tablet-v5.0
+          python3 -c 'import pathlib; p = pathlib.Path("app/src/main/java/id/zoomtranscriber/huawei/MainActivity.kt"); p.write_text(p.read_text().replace("\n---\n", "\\n---\\n").replace("\n\")", "\\n\")"))'
           gradle assembleDebug assembleRelease --no-daemon
 
       - name: Upload Huawei Tablet APK
