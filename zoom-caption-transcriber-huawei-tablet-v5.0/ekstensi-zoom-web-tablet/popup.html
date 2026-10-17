@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoom Caption Transcriber v4.0</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Modern Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="logo-box">🎙️</div>
+        <div>
+          <h1 class="app-title">
+            Zoom Transcriber
+            <span class="ver-badge">v4.0 Auto</span>
+          </h1>
+          <p class="app-subtitle" id="meeting-title">Deteksi Otomatis Per Item Caption</p>
+        </div>
+      </div>
+      <div class="status-indicator" id="status-badge">
+        <span class="status-dot pulse" id="status-dot"></span>
+        <span id="status-text">Merekam</span>
+      </div>
+    </header>
+
+    <!-- Live Item Caption Monitor -->
+    <section class="live-monitor-card" id="live-monitor-card">
+      <div class="lm-header">
+        <span class="lm-title" id="lm-status-title">⚡ DETEKSI TEMPAT CAPTION OTOMATIS</span>
+        <span class="lm-source-badge" id="lm-source-badge">Memindai...</span>
+      </div>
+
+      <div class="lm-item-preview">
+        <div class="lm-avatar" id="lm-avatar">🎙️</div>
+        <div class="lm-item-body">
+          <div class="lm-speaker-row">
+            <span class="lm-speaker" id="lm-speaker">Menunggu Item Caption...</span>
+            <span class="lm-time" id="lm-time">--:--</span>
+          </div>
+          <div class="lm-text" id="lm-text">
+            Saat kotak subtitle muncul di Zoom, setiap item caption (foto/inisial + kalimat) otomatis tertangkap di sini.
+          </div>
+        </div>
+      </div>
+
+      <div class="lm-actions">
+        <button id="btn-pick-target" class="lm-btn lm-btn-pick" title="Klik langsung pada kotak/item caption di layar Zoom">
+          🎯 Pilih Tempat Caption
+        </button>
+        <button id="btn-rescan" class="lm-btn lm-btn-rescan" title="Pindai ulang item caption Zoom otomatis">
+          🔄 Pindai Otomatis
+        </button>
+      </div>
+    </section>
+
+    <!-- Bento Stats Bar -->
+    <section class="stats-bar">
+      <div class="stat-card">
+        <span class="stat-num" id="stat-turns">0</span>
+        <span class="stat-label">Item Caption</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-speakers">0</span>
+        <span class="stat-label">Pembicara</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num" id="stat-words">0</span>
+        <span class="stat-label">Total Kata</span>
+      </div>
+    </section>
+
+    <!-- Search & Speaker Filter -->
+    <section class="filter-section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="input-search" placeholder="Cari teks item caption atau pembicara..." />
+      </div>
+      <select id="select-speaker" class="speaker-filter">
+        <option value="">Semua Pembicara</option>
+      </select>
+    </section>
+
+    <!-- Item Caption Feed -->
+    <main class="transcript-feed" id="transcript-feed">
+      <div class="empty-placeholder">
+        <div class="empty-icon">💬</div>
+        <h3>Belum Ada Item Caption</h3>
+        <p>
+          Pastikan fitur <strong>Live Captions (CC)</strong> aktif di Zoom. Ekstensi akan otomatis mendeteksi tempat caption dan mencatat setiap item pembicara.
+        </p>
+      </div>
+    </main>
+
+    <!-- Action Footer -->
+    <footer class="app-footer">
+      <div class="action-row main-actions">
+        <button id="btn-copy" class="btn btn-secondary" title="Salin seluruh item caption ke clipboard">
+          📋 Salin Semua
+        </button>
+        <button id="btn-export-md" class="btn btn-primary" title="Unduh dokumen Markdown lengkap">
+          📝 Unduh .MD
+        </button>
+        <button id="btn-export-txt" class="btn btn-secondary" title="Unduh sebagai file teks polos">
+          📄 Unduh .TXT
+        </button>
+      </div>
+      <div class="action-row utility-actions">
+        <button id="btn-toggle-record" class="btn-text" title="Jeda atau lanjutkan perekaman item">
+          ⏸️ Jeda Transkrip
+        </button>
+        <button id="btn-clear" class="btn-text danger" title="Bersihkan seluruh daftar item caption">
+          🗑️ Bersihkan Semua
+        </button>
+      </div>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

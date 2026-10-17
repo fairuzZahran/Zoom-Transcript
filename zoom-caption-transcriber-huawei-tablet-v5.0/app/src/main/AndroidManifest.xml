@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Izin Jaringan Lokal untuk Bridge Sinkronisasi Ekstensi Browser (127.0.0.1:18765) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Izin Jendela Mengambang (Floating Target Picker & Live Mini-Window di atas Zoom) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Izin Layanan Latar Belakang & Tangkap Layar Real-Time -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Zoom Transcriber v5.0 (Huawei Tablet)"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:targetApi="34">
+
+        <!-- Activity Utama: Mendukung Landscape Tablet Dual-Pane & Split-Screen Multi-Window Huawei -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
+            android:resizeableActivity="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Engine 1: Layanan Aksesibilitas Penyadap Teks Langsung (Tanpa OCR / Zero-Lag) -->
+        <service
+            android:name=".ZoomCaptionAccessibilityService"
+            android:exported="true"
+            android:label="Zoom Caption Transcriber (Penangkap Teks Langsung)"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
+        <!-- Engine 2 & 3: Layanan Foreground Screen Capture OCR + Floating Picker + Local Bridge -->
+        <service
+            android:name=".ScreenCaptureOcrService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="mediaProjection" />
+
+    </application>
+</manifest>

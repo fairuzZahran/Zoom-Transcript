@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Zoom Caption Transcriber v4.0 (Auto Item Detector)",
+  "version": "4.0.0",
+  "description": "Deteksi otomatis item caption Zoom Web secara real-time, ringan (Zero-Lag), dengan antarmuka modern.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.zoom.us/*",
+    "*://zoom.us/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.zoom.us/*",
+        "*://zoom.us/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

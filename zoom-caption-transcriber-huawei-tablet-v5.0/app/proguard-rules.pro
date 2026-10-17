@@ -1,0 +1,2 @@
+-keep class id.zoomtranscriber.huawei.** { *; }
+-dontwarn com.google.mlkit.**

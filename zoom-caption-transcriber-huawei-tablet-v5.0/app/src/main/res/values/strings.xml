@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Zoom Transcriber v5.0</string>
+    <string name="accessibility_service_desc">Mendeteksi dan menyalin teks Closed Caption / Live Transcript secara langsung dari aplikasi Zoom di Tablet Huawei Anda tanpa membebani baterai.</string>
+</resources>
